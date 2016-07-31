@@ -89,5 +89,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        PackageManager pm = getPackageManager();
+        Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
+        startActivity(launchIntent);
     }
 }
