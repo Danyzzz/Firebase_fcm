@@ -54,9 +54,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         FCMPlugin.sendPushPayload( data );
         //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
     
-    	PackageManager pm = getPackageManager();
-        Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
-        startActivity(launchIntent);
+    	Intent i = new Intent();
+	i.setClass(this, MainActivity.class);
+	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	startActivity(i);
     }
     // [END receive_message]
 
