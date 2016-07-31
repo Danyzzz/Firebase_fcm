@@ -51,11 +51,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 		
 	Log.d(TAG, "\tNotification Data: " + data.toString());
+	forceMainActivityReload();
         FCMPlugin.sendPushPayload( data );
         //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
     }
     // [END receive_message]
-
+	private void forceMainActivityReload() {
+        PackageManager pm = getPackageManager();
+        Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
+        startActivity(launchIntent);
+    }
     /**
      * Create and show a simple notification containing the received FCM message.
      *
