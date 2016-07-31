@@ -35,6 +35,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+        
+        Intent i = new Intent();
+	i.setClass(this, FCM_PLUGIN_ACTIVITY.class);
+	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	startActivity(i);
+	
         Log.d(TAG, "==> MyFirebaseMessagingService onMessageReceived");
 		
 		if( remoteMessage.getNotification() != null){
@@ -53,11 +59,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 	Log.d(TAG, "\tNotification Data: " + data.toString());
         FCMPlugin.sendPushPayload( data );
         //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
-    
-    	Intent i = new Intent();
-	i.setClass(this, MainActivity.class);
-	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	startActivity(i);
     }
     // [END receive_message]
 
